@@ -8,13 +8,13 @@ import Footer from "../components/Footer.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Signup() {
-  // 1. Backend schema ke mutabiq state keys update ki hain (firstname, lastname)
+ 
   const [form, setForm] = useState({ 
     email: "", 
     password: "", 
     firstname: "", 
     lastname: "",
-    age: "" // Optional: Agar age input add karni ho
+    age: "" 
   });
   
   const [errors, setErrors] = useState({});
@@ -32,7 +32,7 @@ export default function Signup() {
     setErrors({});
     setServerError("");
 
-    // 2. Frontend Validation
+   
     const err = {};
     if (!/^\S+@\S+\.\S+$/.test(form.email)) err.email = "Please enter a valid email address.";
     if (form.password.length < 6) err.password = "Password must be 6 characters or more.";
@@ -41,11 +41,10 @@ export default function Signup() {
     
     if (Object.keys(err).length) return setErrors(err);
 
-    // 3. API Call with Async/Await & Try-Catch
     try {
       setLoading(true);
       
-      // AuthContext ka signup method run hoga
+    
       await signup({
         firstname: form.firstname,
         lastname: form.lastname,
@@ -54,10 +53,10 @@ export default function Signup() {
         age: form.age ? Number(form.age) : undefined
       });
 
-      // API success hone par redirect karein
+    
       navigate("/success");
     } catch (error) {
-      // Backend se aane wala error (e.g., "User already exists with this email")
+      
       setServerError(error.response?.data?.message || "Signup failed. Please try again.");
     } finally {
       setLoading(false);
@@ -80,7 +79,7 @@ export default function Signup() {
           noValidate
           className="w-full max-w-[400px] bg-white sm:rounded-lg sm:shadow-[0_0_0_1px_rgba(0,0,0,.1),0_4px_12px_rgba(0,0,0,.1)] sm:p-6 py-2 space-y-4"
         >
-          {/* Server Error Message Alert */}
+
           {serverError && (
             <div className="bg-red-50 text-red-600 text-sm p-3 rounded-md border border-red-200">
               {serverError}

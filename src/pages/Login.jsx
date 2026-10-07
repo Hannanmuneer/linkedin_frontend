@@ -22,22 +22,22 @@ export default function Login() {
     setErrors({});
     setServerError("");
 
-    // 1. Frontend Validations
+   
     const err = {};
     if (!/^\S+@\S+\.\S+$/.test(email)) err.email = "Please enter a valid email address.";
     if (password.length < 6) err.password = "Password must be 6 characters or more.";
     if (Object.keys(err).length) return setErrors(err);
 
-    // 2. Async Login API Call
+    
     try {
       setLoading(true);
       const loginError = await login(email, password);
 
       if (loginError) {
-        // Agar backend se error aaye (e.g., "Invalid email or password")
+        
         setServerError(loginError);
       } else {
-        // Login success hone par redirect
+        
         navigate("/success");
       }
     } catch (error) {
@@ -64,7 +64,7 @@ export default function Login() {
             <p className="text-sm mt-1">Stay updated on your professional world</p>
           </div>
 
-          {/* Server Error Alert Box */}
+       
           {serverError && (
             <div className="bg-red-50 text-red-600 text-sm p-3 rounded-md border border-red-200">
               {serverError}

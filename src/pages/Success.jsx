@@ -6,13 +6,13 @@ export default function Success() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  // 1. Guard Clause: Agar user logged in nahi hai to /login par redirect kar do
+ 
   if (!user) {
     navigate("/login");
     return null;
   }
 
-  // 2. Name Display Logic (Backend Schema compatibility: firstname check karein)
+ 
   const displayName = user.firstname || user.name || user.email?.split("@")[0] || "User";
   const formattedName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
 
